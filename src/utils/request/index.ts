@@ -30,7 +30,7 @@ request.interceptors.request.use(async (config: CustomAxiosConfig) => {
 // 响应 请求拦截器
 request.interceptors.response.use(async (response: AxiosResponse) => {
   // 有返回的响应结果
-  console.log(response)
+  // console.log(response)
   // 业务处理 start
 
   // 业务处理 start
@@ -38,7 +38,7 @@ request.interceptors.response.use(async (response: AxiosResponse) => {
 })
 // 错误统一处理
 const handleErr = (err: any) => {
-  console.log(err)
+  // console.log(err)
 }
 
 export default {

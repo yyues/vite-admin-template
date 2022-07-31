@@ -47,7 +47,7 @@ export default {
     const routers = computed(() => store.state.user.userMenu)
 
     const handleClick = (path: string) => {
-      console.log(path, router)
+      
       router.push({ path })
     }
     return {

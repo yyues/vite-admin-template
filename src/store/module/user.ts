@@ -4,10 +4,10 @@ import { UserState, RootState } from '../typing'
 // 动态 Menu
 import { AsyncBaseRoute } from '/@/router/type'
 import { RouteRecordRaw } from 'vue-router'
-import { setRouteWithList } from "/@/utils/utils";
+import { setRouteWithList } from '/@/utils/utils'
 const { VITE_ADMIN_BASE_ROUTE } = import.meta.env
 
-import router from '/@/router/router'
+import storage from '/@/utils/storage'
 import { filterRouters } from '/@/utils/utils'
 export const user: Module<UserState, RootState> = {
   namespaced: true,
@@ -21,8 +21,10 @@ export const user: Module<UserState, RootState> = {
     },
     setUserMenu(state, payload: RouteRecordRaw[]) {
       state.userMenu = payload
+      // 渲染 路由
       setRouteWithList(payload)
-      localStorage.setItem('UserMenu', JSON.stringify(payload))
+      // 存储 数据
+      storage.set('UserMenu', payload)
     }
   },
   actions: {

@@ -1,6 +1,8 @@
 import { Module } from 'vuex'
 import { AppState, RootState, SizeType } from '../typing'
 
+import storage from '/@/utils/storage'
+
 export const app: Module<AppState, RootState> = {
   namespaced: true,
   state: {
@@ -13,7 +15,7 @@ export const app: Module<AppState, RootState> = {
     isWeb: false,
     isApp: false,
     isPad: false,
-    isLoad: !!localStorage.getItem('onload') || false
+    isLoad: storage.get('appLoad') || false
   },
   mutations: {
     setCollapseWidth(state: AppState, payload: number) {
@@ -38,7 +40,7 @@ export const app: Module<AppState, RootState> = {
     },
     setIsLoad(state, payload: boolean) {
       state.isLoad = payload
-      localStorage.setItem('onload', 'true')
+      storage.set('appLoad', true)
     }
   },
   actions: {

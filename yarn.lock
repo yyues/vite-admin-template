@@ -1130,6 +1130,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/store@^2.0.2":
+  "integrity" "sha512-ZPHnXkzmGMfk+pHqAGzTSpA9CbsHmJLgkvOl5w52LZ0XTxB1ZIHWZzQ7lEtjTNWScBbsQekg8TjApMXkMe4nkw=="
+  "resolved" "https://registry.npmjs.org/@types/store/-/store-2.0.2.tgz"
+  "version" "2.0.2"
+
 "@types/svgo@^2.6.1":
   "integrity" "sha512-5sP0Xgo0dXppY0tbYF6TevB/1+tzFLuu71XXxC/zGvQAn9PW7y+DwtDO81g0ZUPye00K6tPwtsLDOpARa0mFcA=="
   "resolved" "https://registry.npmjs.org/@types/svgo/-/svgo-2.6.3.tgz"
@@ -4030,6 +4035,11 @@
   dependencies:
     "define-property" "^0.2.5"
     "object-copy" "^0.1.0"
+
+"store@^2.0.12":
+  "integrity" "sha512-eO9xlzDpXLiMr9W1nQ3Nfp9EzZieIQc10zPPMP5jsVV7bLOziSFFBP0XoDXACEIFtdI+rIz0NwWVA/QVJ8zJtw=="
+  "resolved" "https://registry.npmjs.org/store/-/store-2.0.12.tgz"
+  "version" "2.0.12"
 
 "strict-uri-encode@^1.0.0":
   "integrity" "sha512-R3f198pcvnB+5IpnBlRkphuE9n46WyVl8I39W/ZUTZLz4nqSP/oLYUrcnJrw462Ds8he4YKMov2efsTIw1BDGQ=="

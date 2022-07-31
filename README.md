@@ -1,22 +1,93 @@
-# Vue 3 + Typescript + Vite
+### Vite + Vue + Ts + Element-plus
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+基于 以上第三方库实现的简单管理系统模板。实现了一些简单的基础功能。
 
-## Recommended IDE Setup
+### 简要心得
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+- 其实，网上有了很多这样的模板，为什么我还要去写一个。可能是因为用的不顺手把，也可能是想锻炼一下自己的基础技术。
+- 很难说我的代码写的很好，只能说基于我的理解写出一个还行的实现。
+- 不知道有没有写出很好的代码片段，但在这个网上扒扒就有一堆实现的时代，是否能坚持自己的想法
 
-## Type Support For `.vue` Imports in TS
+### 管理模板
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+网上真的一堆，但是 clone 下来的时候发现有些是真的难用，尽管模板库提供了很多的规范和较多角度的实现，但还是存在上手有些困难的模块，因此 细分某些领域可能会带来更好的体验，因此 能 期望在某些简单的实现领域有更好的体验。
 
-1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+### 基本功能
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
 
-begin start
 
-install
+> - 本模板所有实现数据皆以 `Vuex` 存储，可能会带来一些理解的问题，和无法抽离出代码直接使用的问题；
+> - 能直接复用的代码皆提供在 `module`文件夹，提供一些常用的操作等
 
-npm create vite@latest
+------
+
+
+
+#### 自适应管理端界面 `src/components/myContainer`
+
+常规的左侧 `Menu`，顶部`Header`，右侧 `Content`
+
+实现：通过监听页面 `resize`的操作来动态修改参数，根据参数实现绑定 `Class`操作，同时全局存储操作状态
+
+- 切换管理端 `dashboard`的标准按照 `store/module/app` 中 `CollapseWidth`和 `HiddenWidth`来实现
+- 绑定的 `class` 不能绑定在 `app`根节点下，故无法依据根节点 class类来判断当前界面大小
+
+> 后续，可能会将 `store`里的数据抽离到 `vue`文件内，然后统一提交到 `store/state`里
+
+
+
+#### 菜单栏动态实现 `src/components/sidebar`
+
+基于 `JSON` 数据的菜单实现，主要用来根据后端数据动态渲染菜单，实现功能控制
+
+实现： 主要是根据**Vue组件的递归调用**来实现对于深层 `children`的渲染实现
+
+- 组件 实现了菜单颜色的自定义，通过 `element-puls` 的 `css变量`来实现的
+- 封装了简单的参数，还有更多功能可以自定义。比如说某个菜单的 `hidden`
+
+> 基于 `Vue`的实现已经完成， `React` 的实现又该如何 ？
+
+
+
+#### 路由管理 `src/router/router.ts`
+
+实现 *动态标题设置*，*权限校验*，*登录处理*，菜单渲染的功能
+
+- 权限校验一般是 后端返回的数据来处理，只需要根据数据格式来处理，不再赘述
+- 菜单渲染则是 后端返回的数据处理，上面 `菜单栏动态实现已说明`
+- 登录处理则是简单的根据 `token` 返回到登录页即可
+
+> 菜单的实现，一种是后端返回对应的数据渲染，此时 component 也由 后端返回的路径处理；一种是根据前端写死的文件地址来配置，有点可能是加载快，缺点就是不能定制，不过 也有问题，动态菜单 刷新会有404问题，通过前置路由 再渲染虽然能解决404问题，但是会有刷新页面空巴的问题，期冀找到更好的解决方式
+
+
+
+#### 请求拦截 `src/utils/request`
+
+常规的 **请求二次封装** 而已
+
+主要是根据管理端需求做处理而已，比如 登录检验、返回信息处理、错误处理。
+
+更多功能还是根据业务定制而已，基本不需要再做额外处理。
+
+
+
+#### 环境区分 `.env[production/develop/testing]`
+
+只需要建立对应的 `env`文件夹，然后填入不同的参数就行。
+
+主要用到的还是 处理外部链接居多，比如 服务器地址和本地地址。
+
+
+
+#### `Svg`图标
+
+简单的依赖 VITE插件。不做过多赘述
+
+> 注意，下载的 `svg` 文件里请删除fill属性，不然没法做到 如 Menu 中的 hover 变色
+
+### 
+
+### 总结
+
+- 其实按照以上划分，已经做到很多了，其他的功能如图标之类，只需按照 项目需求配置
+- 模板基础使用 TS写的，基本很多都有类型提示，但在项目中，希望能不适用 `anyScript`。追求项目进度则没办法

@@ -62,8 +62,24 @@ const hasToken = true
 // 路由前置守卫，实现 信息校验和 title 设置
 const beforeRouter = async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: Function): Promise<any> => {
   NProgress.start()
+
   if (to.meta.title) {
     document.title = VITE_APP_BASE_TITLE + ' | ' + to.meta.title
+  }
+  // 渲染 动态数据应该放在第一位
+  const hasLoad = store.state.app.isLoad as boolean
+
+  console.log({hasLoad});
+  if (hasLoad && true) {
+    await setRouteWithList(store.state.user.userMenu)
+    store.commit('app/setIsLoad', false)
+    next({ ...to })
+    return Promise.resolve()
+  }
+
+  if (to.matched.length == 0) {
+    next({ path: '/404', query: { redirect: to.path } })
+    return Promise.resolve()
   }
   if (!hasToken && to.path !== '/login') {
     // 检测 登录
@@ -75,13 +91,7 @@ const beforeRouter = async (to: RouteLocationNormalized, from: RouteLocationNorm
     })
     return Promise.resolve()
   }
-  const hasLoad = store.state.app.isLoad as boolean
-  if (hasLoad && true) {
-    await setRouteWithList(store.state.user.userMenu)
-    store.commit('app/setIsLoad', false)
-    next({ ...to })
-    return Promise.resolve()
-  }
+
   next()
 }
 

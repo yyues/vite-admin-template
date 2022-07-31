@@ -13,7 +13,7 @@ export const app: Module<AppState, RootState> = {
     isWeb: false,
     isApp: false,
     isPad: false,
-    isLoad: false
+    isLoad: !!localStorage.getItem('onload') || false
   },
   mutations: {
     setCollapseWidth(state: AppState, payload: number) {
@@ -38,12 +38,12 @@ export const app: Module<AppState, RootState> = {
     },
     setIsLoad(state, payload: boolean) {
       state.isLoad = payload
+      localStorage.setItem('onload', 'true')
     }
   },
   actions: {
     onLoad({ commit }) {
       commit('setIsLoad', true)
-      localStorage.setItem('onload', 'true')
     }
   }
 }

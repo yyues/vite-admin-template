@@ -97,22 +97,21 @@
   <div class="lease-submit" v-if="hasAction">
     <slot name="submit" v-if="$slots.submit"></slot>
     <div v-else class="submit-btn">
-      <Button @click="handleSubmit(leaseForm)" :loading="submitLoading">{{ submitText }}</Button>
-      <Button @click="handleCancel(leaseForm)" :loading="cancelLoading">{{ cancelText }}</Button>
+      <el-button @click="handleSubmit(leaseForm)" :loading="submitLoading">{{ submitText }}</el-button>
+      <el-button @click="handleCancel(leaseForm)" :loading="cancelLoading">{{ cancelText }}</el-button>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, PropType, reactive, toRefs, onMounted, watchEffect, defineExpose, watch } from 'vue'
 import { FormInstance, FormItemRule, FormRules } from 'element-plus'
-import Button from '../Button/index.vue'
+
 import { FormOption } from '/@/module/type'
 export interface ModelObject {
   [x: string]: string | any[] | ModelObject | undefined | null | number | boolean
 }
 export default defineComponent({
   inheritAttrs: false,
-  components: { Button },
   props: {
     header: {
       type: Array as PropType<FormOption[]>,

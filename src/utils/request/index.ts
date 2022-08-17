@@ -42,13 +42,13 @@ const handleErr = (err: any) => {
 }
 
 export default {
-  get(url: string, config: AxiosRequestConfig<any>): Promise<any> {
+  get<T>(url: string, config: AxiosRequestConfig<T>): Promise<any> {
     return request.get(url, config).catch((err: unknown) => handleErr(err))
   },
-  post(url: string, config: AxiosRequestConfig<any>): Promise<any> {
+  post<T>(url: string, config: AxiosRequestConfig<T>): Promise<any> {
     return request.post(url, config).catch((err: unknown) => handleErr(err))
   },
-  delete(url: string, config: AxiosRequestConfig<any>): Promise<any> {
+  delete<T>(url: string, config: AxiosRequestConfig<T>): Promise<any> {
     return request.delete(url, config).catch((err: unknown) => handleErr(err))
-  },
+  }
 }

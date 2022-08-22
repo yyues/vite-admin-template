@@ -9,20 +9,8 @@
     @select-all="handleAllChange"
     @select="handleRowChange"
   >
-    <el-table-column
-      v-if="hasSelection"
-      type="selection"
-      :selectable="selectable"
-      align="center"
-      width="55"
-    ></el-table-column>
-    <el-table-column
-      v-if="hasIndex"
-      label="序列"
-      type="index"
-      align="center"
-      width="55"
-    ></el-table-column>
+    <el-table-column v-if="hasSelection" type="selection" :selectable="selectable" align="center" width="55"></el-table-column>
+    <el-table-column v-if="hasIndex" label="序列" type="index" align="center" width="55"></el-table-column>
     <slot name="left" v-if="$slots.left"></slot>
     <slot
       v-for="{ name, key, prop, label, hidden, width, align, showTooltip, slot } in tableHeader"
@@ -46,23 +34,14 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, toRefs, reactive, ref } from 'vue'
-interface iItem {
-  key?: string
-  prop: string
-  label: string
-  width?: string
-  hidden?: string
-  showTooltip?: boolean
-  align?: string
-  name?: string
-  slot?: string
-}
+import { TableItem } from '/@/module/type'
+export type ITableItem = TableItem
 export default defineComponent({
   name: 'Table',
   inheritAttrs: false,
   props: {
     header: {
-      type: Array as PropType<iItem[]>,
+      type: Array as PropType<ITableItem[]>,
       required: true
     },
     data: Object as PropType<any[]>,
@@ -81,7 +60,7 @@ export default defineComponent({
     // Table Ref
     const leaseTable = ref(null)
     const { header } = toRefs(props)
-    const tableHeader = reactive<iItem[]>(header.value as iItem[])
+    const tableHeader = reactive<ITableItem[]>(header.value as ITableItem[])
     /**
      * @param {Object} val 选中的列
      */

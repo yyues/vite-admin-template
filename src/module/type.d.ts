@@ -1,14 +1,14 @@
-import { FormItemRule } from 'element-plus';
+import { FormItemRule } from 'element-plus'
 export interface TableItem {
-  key?: string
-  prop: string
   label: string
+  prop: string
+  name?: string
   width?: string
   hidden?: string
   showTooltip?: boolean
   align?: string
-  name?: string
-  slot?: string
+  slot?: boolean
+  children?: TableItem[]
 }
 export interface InputOption {
   type: 'text' | 'number' | 'radio' | 'password' | 'textarea'

@@ -2,7 +2,6 @@ import { FormItemRule } from 'element-plus'
 export interface TableItem {
   label: string
   prop: string
-  name?: string
   width?: string
   hidden?: string
   showTooltip?: boolean

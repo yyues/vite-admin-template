@@ -13,14 +13,14 @@
     <el-table-column v-if="hasIndex" label="序列" type="index" align="center" width="55"></el-table-column>
     <slot name="left" v-if="$slots.left"></slot>
     <slot
-      v-for="{ name, key, prop, label, hidden, width, align, showTooltip, slot } in tableHeader"
-      :key="key ?? prop"
-      :name="slot ?? name ?? key ?? prop"
-      :data="{ name, key, prop, label, hidden, width, align, showTooltip }"
+      v-for="{ prop, label, hidden, width, align, showTooltip, slot } in tableHeader"
+      :key="prop"
+      :name="slot && prop"
+      :data="{ prop, label, hidden, width, align, showTooltip }"
     >
       <el-table-column
         v-if="!hidden"
-        :key="name || key"
+        :key="prop"
         :width="width"
         :align="align"
         :label="label"

@@ -1,11 +1,9 @@
 <template>
   <template v-if="tableItem.children && tableItem.children.length !== 0">
     <el-table-column :label="tableItem.label" :prop="tableItem.prop">
-      <table-item
-        v-for="item in tableItem.children"
-        :key="item.prop"
-        :tableItem="item"
-      ></table-item>
+      <slot v-for="item in (tableItem.children as ITableItem[])" :key="item.prop" :name="item.slot && item.prop">
+        <table-item :tableItem="item"></table-item>
+      </slot>
     </el-table-column>
   </template>
   <template v-else>
@@ -21,15 +19,15 @@
   </template>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, toRefs } from "vue";
-import { ITableItem } from "./index.vue";
+import { defineComponent, PropType, toRefs } from 'vue'
+import { ITableItem } from './index.vue'
 export default defineComponent({
-  name: "tableItem",
+  name: 'tableItem',
   props: {
     tableItem: {
       type: Object as PropType<ITableItem>,
-      required: true,
-    },
-  },
-});
+      required: true
+    }
+  }
+})
 </script>

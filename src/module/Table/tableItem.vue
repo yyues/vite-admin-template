@@ -1,30 +1,35 @@
 <template>
-  <slot :name="prop" v-if="slot" v-bind="tableItem"></slot>
-  <template v-else>
-    <el-table-column v-if="!hidden" :key="prop" :width="width" :align="align" :label="label" :prop="prop" :show-overflow-tooltip="showTooltip">
-      <template v-if="children && children.length !== 0">
-        <div v-if="(item,index) in (children as ITableItem[])" :key="item">
-          <tableItem :tableItem="item" />
-        </div>
-      </template>
+  <template v-if="tableItem.children && tableItem.children.length !== 0">
+    <el-table-column :label="tableItem.label" :prop="tableItem.prop">
+      <table-item
+        v-for="item in tableItem.children"
+        :key="item.prop"
+        :tableItem="item"
+      ></table-item>
     </el-table-column>
+  </template>
+  <template v-else>
+    <el-table-column
+      v-if="!tableItem.hidden"
+      :key="tableItem.prop"
+      :width="tableItem.width"
+      :align="tableItem.align"
+      :label="tableItem.label"
+      :prop="tableItem.prop"
+      :show-overflow-tooltip="tableItem.showTooltip"
+    ></el-table-column>
   </template>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, toRefs } from 'vue'
-import { ITableItem } from './index.vue'
+import { defineComponent, PropType, toRefs } from "vue";
+import { ITableItem } from "./index.vue";
 export default defineComponent({
-  name: 'tableItem',
+  name: "tableItem",
   props: {
     tableItem: {
       type: Object as PropType<ITableItem>,
-      required: true
-    }
+      required: true,
+    },
   },
-  setup(props) {
-    return {
-      ...toRefs(props.tableItem)
-    }
-  }
-})
+});
 </script>

@@ -9,92 +9,98 @@
     @select-all="handleAllChange"
     @select="handleRowChange"
   >
-    <el-table-column v-if="hasSelection" type="selection" :selectable="selectable" align="center" width="55"></el-table-column>
-    <el-table-column v-if="hasIndex" label="序列" type="index" align="center" width="55"></el-table-column>
+    <el-table-column
+      v-if="hasSelection"
+      type="selection"
+      :selectable="selectable"
+      align="center"
+      width="55"
+    ></el-table-column>
+    <el-table-column
+      v-if="hasIndex"
+      label="序列"
+      type="index"
+      align="center"
+      width="55"
+    ></el-table-column>
     <slot name="left" v-if="$slots.left"></slot>
     <slot
-      v-for="{ prop, label, hidden, width, align, showTooltip, slot } in tableHeader"
-      :key="prop"
-      :name="slot && prop"
-      :data="{ prop, label, hidden, width, align, showTooltip }"
+      v-for="(item, index) in tableHeader"
+      :key="item.prop"
+      :name="item.slot && item.prop"
+      :data="{ item, index }"
     >
-      <el-table-column
-        v-if="!hidden"
-        :key="prop"
-        :width="width"
-        :align="align"
-        :label="label"
-        :prop="prop"
-        :show-overflow-tooltip="showTooltip"
-      ></el-table-column>
+      <table-item :tableItem="item"></table-item>
     </slot>
     <slot name="right" v-if="$slots.right" />
     <slot name="action" v-if="$slots.action" />
   </el-table>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, toRefs, reactive, ref } from 'vue'
-import { TableItem } from '/@/module/type'
-export type ITableItem = TableItem
+import { defineComponent, PropType, toRefs, reactive, ref } from "vue";
+import { TableItem } from "/@/module/type";
+import tableItem from "./tableItem.vue";
+export type ITableItem = TableItem;
 export default defineComponent({
-  name: 'Table',
+  name: "Table",
   inheritAttrs: false,
+  components: { tableItem },
   props: {
     header: {
       type: Array as PropType<ITableItem[]>,
-      required: true
+      required: true,
     },
     data: Object as PropType<any[]>,
     hasSelection: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hasIndex: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    selectable: Function as PropType<(row: any, index: number) => boolean>
+    selectable: Function as PropType<(row: any, index: number) => boolean>,
   },
-  emits: ['selection-change', 'row-change', 'select-all'],
+  emits: ["selection-change", "row-change", "select-all"],
   setup(props, content) {
     // Table Ref
-    const leaseTable = ref(null)
-    const { header } = toRefs(props)
-    const tableHeader = reactive<ITableItem[]>(header.value as ITableItem[])
+    const leaseTable = ref(null);
+    const { header } = toRefs(props);
+    const tableHeader = reactive<ITableItem[]>(header.value as ITableItem[]);
     /**
      * @param {Object} val 选中的列
      */
-    const handleSelectionChange = val => {
-      content.emit('selection-change', val)
-    }
+    const handleSelectionChange = (val) => {
+      content.emit("selection-change", val);
+    };
     /**
      * @param {Array} row 选中列
      * @param {Boolean} selected 是否被选中
      * @description: 复现框单个选项勾选及取消事件
      */
     const handleAllChange = (row, selected: boolean) => {
-      content.emit('select-all', row, selected)
-    }
+      content.emit("select-all", row, selected);
+    };
     /**
      * @param {Object} row 选中列
      * @param {Boolean} selected 是否被选中
      * @description: 复选框全选按钮勾选及取消事件
      */
     const handleRowChange = (row, selected: boolean) => {
-      content.emit('row-change', row, selected)
-    }
+      content.emit("row-change", row, selected);
+    };
     /**
      * @description: 重新布局 Table
      */
     const doLayout = () => {
       // leaseTable.value?.doLayout();
-    }
+    };
     return {
       tableHeader,
       handleRowChange,
       handleAllChange,
-      handleSelectionChange
-    }
-  }
-})
+      handleSelectionChange,
+    };
+  },
+});
 </script>

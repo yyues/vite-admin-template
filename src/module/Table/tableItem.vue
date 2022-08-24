@@ -1,33 +1,47 @@
 <template>
-  <template v-if="tableItem.children && tableItem.children.length !== 0">
-    <el-table-column :label="tableItem.label" :prop="tableItem.prop">
-      <slot v-for="item in (tableItem.children as ITableItem[])" :key="item.prop" :name="item.slot && item.prop">
-        <table-item :tableItem="item"></table-item>
-      </slot>
-    </el-table-column>
-  </template>
-  <template v-else>
-    <el-table-column
-      v-if="!tableItem.hidden"
-      :key="tableItem.prop"
-      :width="tableItem.width"
-      :align="tableItem.align"
-      :label="tableItem.label"
-      :prop="tableItem.prop"
-      :show-overflow-tooltip="tableItem.showTooltip"
-    ></el-table-column>
-  </template>
+  <el-table-column
+    v-bind="$attrs"
+    :prop="tableItem?.prop"
+    :label="tableItem?.label"
+    :width="tableItem?.width"
+    :min-width="tableItem?.minWidth"
+  >
+    <template #default="scope">
+      <template v-if="tableItem?.children && tableItem.children.length > 0">
+        <BusinessTableColumn
+          v-for="childCol in tableItem.children"
+          :key="childCol.prop"
+          :tableItem="childCol"
+        >
+          <template v-for="slot in Object.keys($slots)" #[slot]="scope">
+            <slot :name="slot" v-bind="scope"></slot>
+          </template>
+        </BusinessTableColumn>
+      </template>
+      <template v-else>
+        <!-- 这里通过插槽实现自定义列 -->
+        <slot
+          v-if="tableItem?.slot"
+          :name="scope.column.property"
+          :row="scope.row"
+          :$index="scope.$index"
+        ></slot>
+        <!-- 这里的property自己想办法打印出来看看就明白了 -->
+        <span v-else>{{ scope.row[scope.column.property] }}</span>
+      </template>
+    </template>
+  </el-table-column>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, toRefs } from 'vue'
-import { ITableItem } from './index.vue'
+import { defineComponent, PropType, toRefs } from "vue";
+import { ITableItem } from "./index.vue";
 export default defineComponent({
-  name: 'tableItem',
+  name: "tableItem",
   props: {
     tableItem: {
       type: Object as PropType<ITableItem>,
-      required: true
-    }
-  }
-})
+      required: true,
+    },
+  },
+});
 </script>

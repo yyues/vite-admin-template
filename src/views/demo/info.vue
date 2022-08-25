@@ -12,19 +12,11 @@
   </Table>
   <br />
   <Table :data="data" :header="headerThree">
-    <template #username>
-      <el-table-column label="姓名">
-        <template #default="{ row }">
-          <span>{{ 1111 }}-{{ row.username }}</span>
-        </template>
-      </el-table-column>
+    <template #username="{ row }">
+      <span>{{ 1111 }}-{{ row.username }}</span>
     </template>
-    <template #sex>
-      <el-table-column label="性别-slot">
-        <template #default="{ row }">
-          <span>{{ 1111 }}-{{ row.sex }}</span>
-        </template>
-      </el-table-column>
+    <template #sex="{ row }">
+      <span>{{ 1111 }}-{{ row.sex }}</span>
     </template>
   </Table>
 </template>

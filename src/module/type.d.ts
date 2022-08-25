@@ -7,6 +7,7 @@ export interface TableItem {
   showTooltip?: boolean
   align?: string
   slot?: boolean
+  minWidth?: string
   children?: TableItem[]
 }
 export interface InputOption {

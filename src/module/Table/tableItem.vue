@@ -1,5 +1,13 @@
 <template>
-  <el-table-column v-bind="$attrs" :prop="tableItem?.prop" :label="tableItem?.label" :width="tableItem?.width" :min-width="tableItem?.minWidth">
+  <el-table-column
+    v-bind="$attrs"
+    :prop="tableItem?.prop"
+    :label="tableItem?.label"
+    :width="tableItem?.width"
+    :min-width="tableItem?.minWidth"
+    :show-overflow-tooltip="tableItem.showTooltip"
+    :align="tableItem.align"
+  >
     <template #default="scope">
       <template v-if="tableItem?.children && tableItem.children.length > 0">
         <table-item v-for="childCol in tableItem.children" :key="childCol.prop" :tableItem="childCol">

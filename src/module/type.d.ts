@@ -2,12 +2,12 @@ import { FormItemRule } from 'element-plus'
 export interface TableItem {
   label: string
   prop: string
-  width?: string
+  width?: string | number
   hidden?: string
   showTooltip?: boolean
   align?: string
   slot?: boolean
-  minWidth?: string
+  minWidth?: string | number
   children?: TableItem[]
 }
 export interface InputOption {
@@ -16,7 +16,7 @@ export interface InputOption {
   min?: number | undefined
   max?: number | undefined
   clickFunction?: Function
-  maxlength?: number
+  maxLength?: number
   placeholder?: string | undefined
   formatter?: Function
   parser?: Function

@@ -4,7 +4,7 @@
     class="h-screen"
     :style="`background-image: url('${baseUrl + list[index].url}')`"
   >
-    <header class="w-full h-16 shadow-sm"></header>
+    <header class="w-full h-16 shadow-white"></header>
     <section class="p-4">
       <el-button plain>Primary</el-button>
       <el-button @click="showError">Error</el-button>

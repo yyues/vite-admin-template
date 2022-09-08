@@ -38,6 +38,11 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
+        "/picture": {
+          target: "https://cn.bing.com/",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/picture/, ""),
+        },
       },
     },
     css: {

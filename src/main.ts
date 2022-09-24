@@ -1,3 +1,4 @@
+
 import { createApp } from 'vue'
 import App from './App.vue'
 // App router
@@ -24,5 +25,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
-import SvgIcon from '/@/module/SvgIcon/index.vue'
+import SvgIcon from '/@/Components/icon/index.vue'
 app.component('SvgIcon', SvgIcon)

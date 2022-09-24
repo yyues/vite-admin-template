@@ -5,22 +5,22 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ElAside: typeof import('element-plus/es')['ElAside']
+    Description: typeof import('./components/description/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
-    ElContainer: typeof import('element-plus/es')['ElContainer']
-    ElHeader: typeof import('element-plus/es')['ElHeader']
     ElIcon: typeof import('element-plus/es')['ElIcon']
-    ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
-    MyContainer: typeof import('./components/myContainer/myContainer.vue')['default']
+    Form: typeof import('./components/form/index.vue')['default']
+    Icon: typeof import('./components/icon/index.vue')['default']
+    Page: typeof import('./components/page/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideBar: typeof import('./components/sideBar/index.vue')['default']
     SideBarItem: typeof import('./components/sideBar/sideBarItem.vue')['default']
-    SubmitButton: typeof import('./components/submitButton/submitButton.vue')['default']
+    Table: typeof import('./components/table/index.vue')['default']
+    TableItem: typeof import('./components/table/tableItem.vue')['default']
   }
 }
 

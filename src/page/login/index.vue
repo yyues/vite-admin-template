@@ -116,5 +116,5 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-@import './login.scss';
+@import './index.scss';
 </style>

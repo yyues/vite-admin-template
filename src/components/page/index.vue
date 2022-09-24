@@ -32,7 +32,7 @@ import { ref, computed } from '@vue/reactivity'
 import { onMounted } from '@vue/runtime-core'
 import { debounce } from 'lodash'
 import { defineComponent } from 'vue'
-import { useStore } from '/@/store/store'
+import { useStore } from '../../store'
 
 export default defineComponent({
   props: {

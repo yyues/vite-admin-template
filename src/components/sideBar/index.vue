@@ -7,7 +7,7 @@
 import { reactive, ref } from '@vue/reactivity'
 import { computed, watch } from '@vue/runtime-core'
 import sideBarItem from './sideBarItem.vue'
-import { useStore } from '/@/store/store'
+import { useStore } from '../../store'
 import { useRouter, useRoute } from 'vue-router'
 
 export default {

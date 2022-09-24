@@ -15,13 +15,13 @@
 </template>
 <script lang="ts">
 import { onMounted } from 'vue'
-import { useStore } from './store/store'
+import { useStore } from 'vuex'
 export default {
   setup() {
     const store = useStore()
     onMounted(() => {
       //  开局 获取菜单
-      store.dispatch('user/GetUserMenu')
+      // store.dispatch('user/GetUserMenu')
       // 移除 loading 动画
       ;(document.getElementById('loading') as HTMLElement).remove()
       window.addEventListener('beforeunload', () => {

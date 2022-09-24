@@ -6,7 +6,7 @@ import axios, {
   AxiosResponse,
 } from "axios";
 
-import router from "/@/router/router";
+import router from "../../router";
 
 const request = axios.create({
   baseURL: "",

@@ -11,7 +11,7 @@ import "virtual:svg-icons-register";
 
 const app = createApp(App);
 
-app.use(store).use(router).mount("#custom-app");
+app.use(store, key).use(router).mount("#custom-app");
 
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";

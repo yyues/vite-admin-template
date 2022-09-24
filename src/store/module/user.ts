@@ -9,7 +9,16 @@ export const user: Module<UserState, RootState> = {
   namespaced: true,
   state: {
     userInfo: {},
-    userMenu: [],
+    userMenu: [
+      {
+        path: "/login",
+        component: () => import("/@/page/login/index.vue"),
+        meta: {
+          title: "User Login",
+          keepAlive: false,
+        },
+      },
+    ],
   },
   mutations: {
     setUserInfo(state, payload) {

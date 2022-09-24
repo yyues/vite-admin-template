@@ -7,6 +7,12 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Description: typeof import('./components/description/index.vue')['default']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     Form: typeof import('./components/form/index.vue')['default']
     Icon: typeof import('./components/icon/index.vue')['default']
     Page: typeof import('./components/page/index.vue')['default']
